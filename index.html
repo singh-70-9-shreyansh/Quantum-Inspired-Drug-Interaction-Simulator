@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> QIDS : Quantum-Inspired Drug Interaction Simulator</title>
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.0.4/3Dmol-min.js"></script>
+</head>
+<body>
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-container">
+      <div class="loading-logo">
+        <i class="fas fa-dna"></i>
+        <h2>QIDS</h2>
+      </div>
+      <div class="loading-bar">
+        <div class="loading-progress"></div>
+      </div>
+      <p>Initializing Quantum Simulations...</p>
+    </div>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <i class="fas fa-dna"></i>
+      <span>QIDS</span>
+    </div>
+    <ul class="nav-menu">
+      <li><a href="#dashboard" class="nav-link active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+      <li><a href="#simulator" class="nav-link"><i class="fas fa-flask"></i> Simulator</a></li>
+      <li><a href="#library" class="nav-link"><i class="fas fa-database"></i> Library</a></li>
+      <li><a href="#analytics" class="nav-link"><i class="fas fa-chart-line"></i> Analytics</a></li>
+      <li><a href="#reports" class="nav-link"><i class="fas fa-file-export"></i> Reports</a></li>
+    </ul>
+    <div class="nav-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    
+    <section id="dashboard" class="page active">
+      <div class="page-header">
+        <h1><i class="fas fa-tachometer-alt"></i> Research Dashboard</h1>
+        <p>Overview of your drug discovery pipeline</p>
+      </div>
+      
+      <div class="dashboard-grid">
+        <div class="stat-card success">
+          <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="stat-content">
+            <h3 id="successRate">0%</h3>
+            <p>Success Rate</p>
+          </div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-icon"><i class="fas fa-clock"></i></div>
+          <div class="stat-content">
+            <h3 id="avgScore">0.00</h3>
+            <p>Avg Binding Score</p>
+          </div>
+        </div>
+        <div class="stat-card info">
+          <div class="stat-icon"><i class="fas fa-sim-card"></i></div>
+          <div class="stat-content">
+            <h3 id="totalSims">0</h3>
+            <p>Total Simulations</p>
+          </div>
+        </div>
+        <div class="stat-card danger">
+          <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+          <div class="stat-content">
+            <h3 id="highRisk">0</h3>
+            <p>High Risk Compounds</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-charts">
+        <div class="chart-card">
+          <h3>Recent Simulations</h3>
+          <canvas id="recentChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Score Distribution</h3>
+          <canvas id="distributionChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section id="simulator" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-flask"></i> Quantum Molecular Simulator</h1>
+        <p>Advanced pharmacokinetic/pharmacodynamic modeling</p>
+      </div>
+
+      <div class="simulator-grid">
+        <div class="input-panel">
+          <h3>🧬 Drug Properties</h3>
+          <div class="input-group">
+            <label>LogP (Lipophilicity)</label>
+            <input type="range" id="logp" min="-5" max="5" step="0.1" value="0">
+            <span id="logpValue">0.0</span>
+          </div>
+          <div class="input-group">
+            <label>MW (Molecular Weight, Da)</label>
+            <input type="range" id="mw" min="100" max="1000" step="10" value="500">
+            <span id="mwValue">500</span>
+          </div>
+          <div class="input-group">
+            <label>HBD (H-Bond Donors)</label>
+            <input type="range" id="hbd" min="0" max="10" step="1" value="2">
+            <span id="hbdValue">2</span>
+          </div>
+          <div class="input-group">
+            <label>HBA (H-Bond Acceptors)</label>
+            <input type="range" id="hba" min="0" max="15" step="1" value="5">
+            <span id="hbaValue">5</span>
+          </div>
+          <div class="input-group">
+            <label>TPSA (Polar Surface Area, Å²)</label>
+            <input type="range" id="tpsa" min="0" max="200" step="5" value="70">
+            <span id="tpsaValue">70</span>
+          </div>
+        </div>
+
+        <div class="input-panel">
+          <h3>🎯 Target Properties</h3>
+          <div class="input-group">
+            <label>Binding Pocket Score</label>
+            <input type="range" id="pocketScore" min="0" max="10" step="0.1" value="5">
+            <span id="pocketScoreValue">5.0</span>
+          </div>
+          <div class="input-group">
+            <label>Hydrophobicity</label>
+            <input type="range" id="hydrophobicity" min="0" max="10" step="0.1" value="5">
+            <span id="hydrophobicityValue">5.0</span>
+          </div>
+          <div class="input-group">
+            <label>Flexibility</label>
+            <input type="range" id="flexibility" min="0" max="10" step="0.1" value="3">
+            <span id="flexibilityValue">3.0</span>
+          </div>
+          <div class="input-group">
+            <label>Charge Complementarity</label>
+            <input type="range" id="chargeComp" min="0" max="10" step="0.1" value="6">
+            <span id="chargeCompValue">6.0</span>
+          </div>
+        </div>
+
+        <div class="control-panel">
+          <button class="btn-primary" onclick="runAdvancedSimulation()">
+            <i class="fas fa-rocket"></i> Run Quantum Simulation
+          </button>
+          <button class="btn-secondary" onclick="quickScreen()">
+            <i class="fas fa-bolt"></i> Quick Screen
+          </button>
+          <div class="simulation-status">
+            <div id="statusIndicator" class="status-offline"></div>
+            <span id="statusText">Ready</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="resultsPanel" class="results-panel hidden">
+        <div class="results-header">
+          <h3 id="compoundName">Compound QX-001</h3>
+          <div class="result-score" id="mainScore">0</div>
+        </div>
+        <div class="results-grid">
+          <div class="metric-card">
+            <h4>Binding Affinity (kcal/mol)</h4>
+            <div class="metric-value" id="bindingAffinity">-7.2</div>
+          </div>
+          <div class="metric-card">
+            <h4>Druglikeness Score</h4>
+            <div class="metric-value" id="druglikeness">0.85</div>
+          </div>
+          <div class="metric-card">
+            <h4>ADMET Risk</h4>
+            <div class="metric-value risk-high" id="admetRisk">Low</div>
+          </div>
+          <div class="metric-card">
+            <h4>Success Probability</h4>
+            <div class="metric-value" id="successProb">78%</div>
+          </div>
+        </div>
+        <canvas id="detailedChart"></canvas>
+        <div class="action-buttons">
+          <button class="btn-success" onclick="saveCompound()">Save to Library</button>
+          <button class="btn-warning" onclick="optimizeCompound()">AI Optimize</button>
+          <button class="btn-danger" onclick="flagHighRisk()">Flag Risk</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="library" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-database"></i> Compound Library</h1>
+        <p>Manage your drug candidates and screening results</p>
+      </div>
+      <div class="library-controls">
+      <input type="text" id="searchLibrary" placeholder="Search compounds...">
+      <select id="filterStatus">
+        <option value="all">All Status</option>
+      </select>
+      <button class="btn btn-primary">Export Library</button>
+    </div>
+
+    <div class="library-header">
+      <div class="header-name">Compound Name</div>
+      <div class="header-score">MPO Score</div>
+      <div class="header-affinity">Affinity</div>
+      <div class="header-risk">Risk</div>
+      <div class="header-date">Date</div>
+      <div class="header-actions">Actions</div>
+    </div>
+    <div id="libraryTable" class="library-grid"></div>
+        </div>
+    </section>
+
+    <section id="analytics" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-chart-line"></i> Analytics & Insights</h1>
+        <p>Data-driven optimization for your research pipeline</p>
+      </div>
+
+      <div class="kpi-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px;">
+        <div class="kpi-card" style="background: var(--panel-bg); border: 1px solid var(--glass-border); padding: 15px; border-radius: 8px; border-top: 3px solid #00f2fe;">
+          <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">Total Screened</div>
+          <div id="kpiTotal" style="font-size: 1.8rem; font-weight: bold; color: #fff; margin-top: 5px;">0</div>
+        </div>
+        <div class="kpi-card" style="background: var(--panel-bg); border: 1px solid var(--glass-border); padding: 15px; border-radius: 8px; border-top: 3px solid #10b981;">
+          <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">Avg MPO Score</div>
+          <div id="kpiAvgScore" style="font-size: 1.8rem; font-weight: bold; color: #fff; margin-top: 5px;">0.0</div>
+        </div>
+        <div class="kpi-card" style="background: var(--panel-bg); border: 1px solid var(--glass-border); padding: 15px; border-radius: 8px; border-top: 3px solid #f59e0b;">
+          <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">Perfect RO5 Pass</div>
+          <div id="kpiRo5" style="font-size: 1.8rem; font-weight: bold; color: #fff; margin-top: 5px;">0</div>
+        </div>
+        <div class="kpi-card" style="background: var(--panel-bg); border: 1px solid var(--glass-border); padding: 15px; border-radius: 8px; border-top: 3px solid #ef4444;">
+          <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">High Tox Warning</div>
+          <div id="kpiTox" style="font-size: 1.8rem; font-weight: bold; color: #fff; margin-top: 5px;">0</div>
+        </div>
+      </div>
+
+      <div class="analytics-grid">
+        <div class="analytics-card">
+          <h3>Trend Analysis</h3>
+          <canvas id="trendChart"></canvas>
+        </div>
+        <div class="analytics-card">
+          <h3>Property Correlation Matrix</h3>
+          <canvas id="correlationChart"></canvas>
+        </div>
+        
+        <div class="analytics-card">
+          <h3>ADMET Risk Profile</h3>
+          <canvas id="admetRiskChart" height="200"></canvas>
+        </div>
+
+        <div class="analytics-card full-width">
+          <h3>Optimization Recommendations</h3>
+          <div id="recommendations">
+            <p id="insightText"><strong>Insight:</strong> Run your first simulation to generate data-driven insights.</p>
+            <p id="warningText"><strong>Status:</strong> No data available. Awaiting simulation results.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reports" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-file-export"></i> Research Reports</h1>
+        <p>Professional PDF reports for publications and grants</p>
+      </div>
+      <div class="reports-grid">
+        <div class="report-card">
+          <h3>Comprehensive Pipeline Report</h3>
+          <p>All simulations, analytics, and recommendations</p>
+          <button class="btn-primary" onclick="generateFullReport()">Generate Report</button>
+        </div>
+        <div class="report-card">
+          <h3>Top Candidates Summary</h3>
+          <p>Best 10 compounds with key metrics</p>
+          <button class="btn-primary" onclick="generateTopReport()">Generate Report</button>
+        </div>
+        <div class="report-card">
+          <h3>Custom Report</h3>
+          <p>Select specific compounds and metrics</p>
+          <button class="btn-primary" onclick="showCustomReport()">Customize</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="molecularViewer" class="modal">
+  <div class="modal-content" style="width: 800px; max-width: 90%;">
+    <div class="modal-header">
+      <h3 id="molModalTitle">3D Molecular Analysis</h3>
+      <button class="close-modal">&times;</button>
+    </div>
+    
+    <div style="position: relative; width: 100%; border: 1px solid rgba(0,242,254,0.2); border-radius: 8px; overflow: hidden; background: #000;">
+      
+      <div id="molContainer" style="width: 100%; height: 500px; position: relative;"></div>
+      
+      <div class="hud-overlay">
+        <div class="hud-title">LIVE TELEMETRY</div>
+        <p><strong>COMPOUND:</strong> <span id="hudName">Loading...</span></p>
+        <p><strong>PUBCHEM CID:</strong> <span id="hudCid">---</span></p>
+        <p><strong>MOL WEIGHT:</strong> <span id="hudWt">---</span> g/mol</p>
+        <p><strong>LogP:</strong> <span id="hudLogp">---</span></p>
+        <p><strong>H-BONDS (D/A):</strong> <span id="hudBonds">---</span></p>
+        <p><strong>TPSA:</strong> <span id="hudTpsa">---</span> Å²</p>
+        <p style="margin-top: 10px; border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 10px;">
+          <strong>RO5 STATUS:</strong> <span id="hudLipinski">---</span>
+        </p>
+      </div>
+
+      <div class="render-controls" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; background: rgba(0,0,0,0.6); padding: 8px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); z-index: 10;">
+        <button id="btnStick" style="background: transparent; border: 1px solid #00f2fe; color: #00f2fe; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem;">Ball & Stick</button>
+        <button id="btnSpacefill" style="background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem;">Spacefill</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script src="js/globals.js"></script>
+<script src="js/math.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

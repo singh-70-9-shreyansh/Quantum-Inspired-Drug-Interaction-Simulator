@@ -1,0 +1,73 @@
+/* ==========================================================================
+   THEME: Core Variables, Reset, Typography, and Animations
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+  /* Core Colors */
+  --bg-main: #060913;
+  --bg-secondary: #0b1121;
+  --panel-bg: rgba(16, 23, 42, 0.6);
+  
+  /* Brand Gradients (Quantum Feel) */
+  --primary: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  --primary-alt: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+  --primary-glow: 0 0 25px rgba(0, 242, 254, 0.4);
+  
+  /* Status Colors */
+  --success: #10b981;
+  --success-glow: 0 0 15px rgba(16, 185, 129, 0.4);
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --danger-glow: 0 0 15px rgba(239, 68, 68, 0.4);
+  --info: #3b82f6;
+  
+  /* Glass Elements */
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-hover: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-highlight: rgba(255, 255, 255, 0.2);
+  
+  /* Text */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  /* Structural */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Base Reset & Typography */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-main);
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-main); }
+::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulseGlow { 0% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); } 50% { box-shadow: 0 0 25px rgba(59, 130, 246, 0.8); } 100% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); } }
+@keyframes loadingBar { 0% { width: 0%; left: 0; } 50% { width: 100%; left: 0; } 100% { width: 0%; left: 100%; } }

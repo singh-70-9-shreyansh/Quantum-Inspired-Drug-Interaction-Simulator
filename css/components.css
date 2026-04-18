@@ -1,0 +1,277 @@
+/* ==========================================================================
+   COMPONENTS: Cards, Buttons, Inputs, Tables, and Modals
+   ========================================================================== */
+
+/* Glass Cards (Global Profile) */
+.glass-panel, .stat-card, .chart-card, .input-panel, .results-panel, .report-card, .analytics-card {
+  background: var(--panel-bg);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+}
+
+/* Stat Cards */
+.stat-card { padding: 1.5rem; display: flex; align-items: center; gap: 1.5rem; transition: transform 0.3s ease, border-color 0.3s ease; }
+.stat-card:hover { transform: translateY(-5px); border-color: var(--glass-border-highlight); }
+.stat-icon { width: 50px; height: 50px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+.stat-content h3 { font-size: 2rem; color: #fff; margin-bottom: 0.2rem; }
+.stat-content p { color: var(--text-secondary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+.stat-card.success .stat-icon { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+.stat-card.warning .stat-icon { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+.stat-card.info .stat-icon { background: rgba(59, 130, 246, 0.1); color: var(--info); }
+.stat-card.danger .stat-icon { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+
+/* Chart Cards */
+.chart-card { padding: 1.5rem; }
+.chart-card h3 { margin-bottom: 1.5rem; color: var(--text-secondary); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+
+/* Nav Links & Toggles */
+.nav-link {
+  color: var(--text-secondary); text-decoration: none;
+  padding: 0.6rem 1.2rem; border-radius: var(--radius-sm);
+  transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; font-weight: 500;
+}
+.nav-link:hover, .nav-link.active {
+  color: #fff; background: var(--glass);
+  box-shadow: inset 0 -2px 0 #00f2fe;
+}
+.nav-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--text-primary); }
+
+/* Input Panels & Sliders */
+.input-panel { padding: 1.5rem; }
+.input-panel h3 { margin-bottom: 1.5rem; font-size: 1.2rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem; }
+.input-group { margin-bottom: 1.2rem; }
+.input-group label { display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.9rem; }
+.input-group span { float: right; color: #00f2fe; font-weight: 700; font-family: 'Space Grotesk', monospace; }
+
+input[type="range"] {
+  -webkit-appearance: none; width: 100%; height: 6px; border-radius: 3px;
+  background: #1e293b; outline: none; margin-top: 5px;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #fff; box-shadow: 0 0 10px rgba(255,255,255,0.5);
+  cursor: pointer; transition: transform 0.1s;
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+/* Buttons & Controls */
+.control-panel { display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem; background: var(--panel-bg); border-radius: var(--radius-md); border: 1px solid var(--glass-border); justify-content: center; }
+button { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1rem; padding: 1rem; border-radius: var(--radius-sm); border: none; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.btn-primary { background: var(--primary); color: #fff; box-shadow: var(--primary-glow); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 35px rgba(0, 242, 254, 0.6); }
+.btn-secondary { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.1); }
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.1); }
+.btn-success { background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
+.btn-success:hover { background: var(--success); color: #fff; }
+.btn-warning { background: rgba(245, 158, 11, 0.2); color: var(--warning); border: 1px solid var(--warning); }
+.btn-warning:hover { background: var(--warning); color: #fff; }
+.btn-danger { background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+.btn-danger:hover { background: var(--danger); color: #fff; }
+
+/* Status Badges */
+.simulation-status { margin-top: 1rem; text-align: center; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: var(--radius-sm); }
+.status-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; }
+.status-running { color: #00f2fe; background: rgba(0, 242, 254, 0.1); border: 1px solid #00f2fe; animation: pulseGlow 2s infinite; }
+.status-success { color: var(--success); background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); }
+.status-offline { width: 10px; height: 10px; border-radius: 50%; background: var(--text-muted); display: inline-block; }
+
+/* Results Components */
+.results-panel { padding: 2rem; margin-top: 2rem; border-top: 2px solid #00f2fe; }
+.results-panel.hidden { display: none; }
+.results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.results-header h3 { font-size: 2rem; color: #fff; }
+.result-score { font-size: 3rem; font-weight: 700; font-family: 'Space Grotesk', monospace; text-shadow: 0 0 20px rgba(255,255,255,0.2); }
+.result-score.success { color: var(--success); }
+.result-score.warning { color: var(--warning); }
+.result-score.danger { color: var(--danger); }
+
+.metric-card { background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.05); text-align: center; }
+.metric-card h4 { color: var(--text-secondary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+.metric-value { font-size: 1.8rem; font-weight: 700; color: #fff; }
+.risk-low { color: var(--success); }
+.risk-medium { color: var(--warning); }
+.risk-high { color: var(--danger); text-shadow: var(--danger-glow); }
+.action-buttons { display: flex; gap: 1rem; margin-top: 2rem; justify-content: flex-end; }
+
+/* ========================================= */
+/* Library Table                             */
+/* ========================================= */
+
+/* Library Table Column Headers */
+.library-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Added a tiny bit of left padding (1.8rem instead of 1.5rem) to account for the colored 4px border on the rows below it! */
+  padding: 0 1.5rem 10px 1.8rem; 
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 10px;
+}
+
+/* Matching the exact percentage widths of the compound rows */
+.header-name { width: 20%; text-align: left; }
+.header-score, 
+.header-affinity, 
+.header-risk, 
+.header-date { 
+  width: 15%; 
+  text-align: center; 
+}
+.header-actions { 
+  width: 15%; 
+  text-align: right; 
+  /* Pushes the word "Actions" slightly left so it hovers perfectly over the trash can icon */
+  padding-right: 25px; 
+}
+
+/* Library Controls (Search & Export) */
+.library-controls { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+.library-controls input, .library-controls select { 
+  background: var(--panel-bg); color: #fff; border: 1px solid var(--glass-border); 
+  padding: 0.8rem 1rem; border-radius: var(--radius-sm); font-family: 'Inter'; outline: none; 
+}
+.library-controls input:focus, .library-controls select:focus { border-color: #00f2fe; }
+.library-controls input { flex: 1; }
+
+/* The Data Rows */
+.library-table { display: flex; flex-direction: column; gap: 0.5rem; }
+.compound-row { 
+  display: flex; align-items: center; justify-content: space-between; 
+  padding: 1rem 1.5rem; background: var(--panel-bg); border: 1px solid var(--glass-border); 
+  border-radius: var(--radius-sm); transition: all 0.2s ease; cursor: pointer;
+}
+.compound-row:hover { background: var(--glass-hover); border-color: var(--glass-border-highlight); transform: translateX(5px); }
+.compound-row.success { border-left: 4px solid var(--success); }
+.compound-row.warning { border-left: 4px solid var(--warning); }
+.compound-row.danger { border-left: 4px solid var(--danger); }
+
+/* Row Width Mapping (These now perfectly match the header classes above) */
+.compound-id { font-weight: 700; font-family: 'Space Grotesk'; width: 20%; }
+.compound-score, .compound-affinity, .compound-risk, .compound-date { color: var(--text-secondary); width: 15%; text-align: center; }
+.compound-actions { display: flex; gap: 10px; width: 15%; justify-content: flex-end; }
+.compound-actions button { padding: 0.5rem; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-secondary); border: none; cursor: pointer; transition: 0.2s; }
+.compound-actions button:hover { background: #00f2fe; color: #000; }
+
+.empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
+.empty-state i { font-size: 3rem; margin-bottom: 1rem; opacity: 0.5; }
+
+/* Report & Analytics Components */
+.analytics-card, .report-card { padding: 2rem; }
+.analytics-card h3, .report-card h3 { margin-bottom: 1rem; color: #fff; }
+#recommendations p { background: rgba(255,255,255,0.02); padding: 1rem; border-left: 3px solid var(--warning); margin-bottom: 0.5rem; border-radius: 0 4px 4px 0; }
+.report-card p { color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6; }
+
+/* Modals */
+.modal { display: none; }
+.modal-content { background: var(--bg-secondary); padding: 2rem; border-radius: var(--radius-md); border: 1px solid rgba(0, 242, 254, 0.3); box-shadow: 0 0 50px rgba(0,0,0,0.8); width: 400px; text-align: center; position: relative; }
+.modal-header { display: flex; justify-content: space-between; margin-bottom: 1rem; }
+.close-modal { background: none; border: none; color: #fff; font-size: 1.5rem; padding: 0; }
+
+/* 3D Scientific HUD Overlay */
+.hud-overlay {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(10, 15, 30, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 242, 254, 0.4);
+  border-left: 4px solid #00f2fe;
+  padding: 15px;
+  border-radius: 4px;
+  color: #00f2fe;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.9rem;
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+  
+  /* THIS IS THE MAGIC TRICK: Lets you click the 3D model through the HUD */
+  pointer-events: none; 
+}
+
+.hud-title {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 5px;
+}
+
+.hud-overlay p { margin: 5px 0; text-shadow: 0 0 5px rgba(0,242,254,0.5); }
+.hud-overlay strong { color: #fff; font-weight: 600; text-shadow: none; }
+
+
+
+/* Loading Animation Elements */
+.loading-logo i { font-size: 4rem; color: #00f2fe; text-shadow: var(--primary-glow); }
+.loading-logo h2 { font-size: 3rem; background: var(--primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.loading-bar { width: 300px; height: 4px; background: #1e293b; border-radius: 4px; position: relative; overflow: hidden; }
+.loading-progress { position: absolute; height: 100%; background: var(--primary); border-radius: 4px; animation: loadingBar 2s ease-in-out infinite; }
+
+/* ========================================= */
+/* Analytics Grid & Cards                    */
+/* ========================================= */
+
+.analytics-grid {
+  display: grid;
+  /* Creates exactly 3 equal columns for your 3 charts */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.analytics-card {
+  background: var(--panel-bg); 
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.analytics-card h3 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 0.75rem;
+}
+
+/* THE MAGIC TRICK: This forces the Recommendations card to stretch across all 3 columns */
+.analytics-card.full-width {
+  grid-column: 1 / -1; 
+}
+
+/* ========================================= */
+/* Responsive Design (For Laptops & Tablets) */
+/* ========================================= */
+
+/* If the screen is smaller than 1100px (like a smaller laptop or iPad) */
+@media (max-width: 1100px) {
+  .analytics-grid {
+    grid-template-columns: repeat(2, 1fr); /* Drop to 2 columns */
+  }
+}
+
+/* If the screen is mobile-sized */
+@media (max-width: 768px) {
+  .analytics-grid {
+    grid-template-columns: 1fr; /* Stack everything vertically */
+  }
+  
+  /* Make the KPI top cards wrap to 2x2 instead of 4 in a row */
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

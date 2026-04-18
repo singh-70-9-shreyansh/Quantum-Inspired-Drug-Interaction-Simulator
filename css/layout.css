@@ -1,0 +1,62 @@
+/* ==========================================================================
+   LAYOUT: Grids, Structural Alignment, and Media Queries
+   ========================================================================== */
+
+/* Main Content & Pages */
+.main-content { margin-top: 80px; padding: 2rem 3rem; min-height: calc(100vh - 80px); }
+.page { display: none; animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+.page.active { display: block; }
+
+.page-header { margin-bottom: 3rem; border-left: 4px solid #00f2fe; padding-left: 1.5rem; }
+.page-header h1 { font-size: 2.5rem; display: flex; align-items: center; gap: 15px; margin-bottom: 0.5rem; }
+.page-header p { color: var(--text-secondary); font-size: 1.1rem; }
+
+/* Navigation Structure */
+.navbar {
+  position: fixed; top: 0; width: 100%;
+  background: rgba(6, 9, 19, 0.8);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  z-index: 1000; padding: 1rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand { display: flex; align-items: center; gap: 12px; font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; }
+.nav-brand i { color: #00f2fe; }
+.nav-menu { display: flex; list-style: none; gap: 1.5rem; }
+
+/* Grid Layouts */
+.dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+.dashboard-charts { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+.simulator-grid { display: grid; grid-template-columns: 1fr 1fr 300px; gap: 1.5rem; margin-bottom: 2rem; }
+.results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+.analytics-grid, .reports-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; }
+.analytics-card.full-width { grid-column: 1 / -1; }
+
+/* Loading Screen Layout */
+.loading-screen {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--bg-main);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10000; transition: opacity 0.5s ease;
+}
+.loading-logo { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; }
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .simulator-grid { grid-template-columns: 1fr 1fr; }
+  .control-panel { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .control-panel button { flex: 1; }
+  .dashboard-charts { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .main-content { padding: 1rem; }
+  .navbar { padding: 1rem; }
+  .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-secondary); padding: 1rem 0; }
+  .nav-menu.active { display: flex; }
+  .nav-toggle { display: block; }
+  .simulator-grid { grid-template-columns: 1fr; }
+  .results-grid { grid-template-columns: 1fr 1fr; }
+  .compound-row { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .compound-id, .compound-score, .compound-affinity, .compound-risk, .compound-date, .compound-actions { width: 100%; text-align: left; justify-content: flex-start; }
+}
